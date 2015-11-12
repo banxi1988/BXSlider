@@ -1,0 +1,6 @@
+framework module BXSlider {
+  umbrella header "BXSlider-umbrella.h"
+
+  export *
+  module * { export * }
+}

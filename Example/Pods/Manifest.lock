@@ -1,0 +1,14 @@
+PODS:
+  - BXSlider (0.1.0)
+
+DEPENDENCIES:
+  - BXSlider (from `../`)
+
+EXTERNAL SOURCES:
+  BXSlider:
+    :path: ../
+
+SPEC CHECKSUMS:
+  BXSlider: 68df072a786d0d3c60ed47430f8dbedca5b0e751
+
+COCOAPODS: 0.39.0
