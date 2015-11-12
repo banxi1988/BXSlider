@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08193DF4F4346E326F07CBD4EEFDCBAD /* BXSlider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7B4DBB612B04A2769053A8F97BD862 /* BXSlider-dummy.m */; };
 		1DF7DBD13B22A4E6FC496EDB5374B251 /* Pods-BXSlider_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69BDB5DA9EDEFB9CA741EB19EA41DC /* Pods-BXSlider_Example-dummy.m */; };
-		3B0693C8B3978FEF6CF2D36D17366DB8 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF384740075A30B65BA111F818E9AFC /* ReplaceMe.swift */; };
 		4D108A4417C65110385C0C5BADF0505D /* Pods-BXSlider_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DB8187DB57F68B1A57A88C846E9BE59 /* Pods-BXSlider_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5180DAB42BFD65FD16209F24F63F8354 /* BXSlider-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A6AE8A135FCBAF3A8214D28D2A7E9B8 /* BXSlider-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		775DBD25BEBC167874B2E9B99CEE0694 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		7B198C1D12F6FE3EECF3176EA8342278 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		9B0626067FFE47D57DA83B67D2A374D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		9D46611B1216206A0ED426202F3C2906 /* BXSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4E6DA5C6E71C19DA290F634E5C5E36 /* BXSlider.swift */; };
 		A694264EC6A4C3ED13400CEDE3192583 /* Pods-BXSlider_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E7A196464D6B2B9F260911FBB65432A5 /* Pods-BXSlider_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B8EC0AA2526E1AB60048B30354A81DBE /* Pods-BXSlider_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 005EA1C9DD5B40A0E07C5C0C38DB217E /* Pods-BXSlider_Tests-dummy.m */; };
-		C9AFAA943BAA1A4979597A9EC6108429 /* BXSlider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7B4DBB612B04A2769053A8F97BD862 /* BXSlider-dummy.m */; };
 		D2FB7755FABFC1B215B072B8DC652BD1 /* BXSlider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FF578B13B0F12F783DF9E50415C6FC48 /* BXSlider.bundle */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +47,7 @@
 /* Begin PBXFileReference section */
 		005EA1C9DD5B40A0E07C5C0C38DB217E /* Pods-BXSlider_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BXSlider_Tests-dummy.m"; sourceTree = "<group>"; };
 		07573EBFEA0F937AD0C2EA48B70D0FE1 /* Pods-BXSlider_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BXSlider_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		12DFEEB3509D877B6CE65BCE2EEB0562 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "Reveal-Framework-iOS-1.6.2/Reveal.framework"; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3ED0B6090391AA30BA2E34222896291D /* Pods_BXSlider_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BXSlider_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE008FC6491B3D98D166E8491759C5B /* Pods-BXSlider_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BXSlider_Tests-resources.sh"; sourceTree = "<group>"; };
@@ -70,10 +71,10 @@
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BBFEF549FDE49FEEE736836DE5AAD470 /* BXSlider.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BXSlider.xcconfig; sourceTree = "<group>"; };
 		C6C73661F4B975B1046B1637028E83AB /* Pods-BXSlider_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BXSlider_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		DA4E6DA5C6E71C19DA290F634E5C5E36 /* BXSlider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BXSlider.swift; sourceTree = "<group>"; };
 		DCCCD21E94943955FA0AF1DF4BA1A132 /* Pods-BXSlider_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BXSlider_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DEBDAEE2807EEE42BE35C5E719CEBFCE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7A196464D6B2B9F260911FBB65432A5 /* Pods-BXSlider_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BXSlider_Tests-umbrella.h"; sourceTree = "<group>"; };
-		EAF384740075A30B65BA111F818E9AFC /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		EF69BDB5DA9EDEFB9CA741EB19EA41DC /* Pods-BXSlider_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BXSlider_Example-dummy.m"; sourceTree = "<group>"; };
 		EF8F80725D17F17F48BE428F20CE41CA /* Pods-BXSlider_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BXSlider_Tests.modulemap"; sourceTree = "<group>"; };
 		FB7B4DBB612B04A2769053A8F97BD862 /* BXSlider-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BXSlider-dummy.m"; sourceTree = "<group>"; };
@@ -115,14 +116,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2470432B691B95D8F39DAD47DF52D972 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				EAF384740075A30B65BA111F818E9AFC /* ReplaceMe.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		2BEB3F41F6C5DE23DA68BA0F0B9E1862 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +143,7 @@
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				AC5CF58ABA005406EFCCBD0C0D4BDE79 /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				C6FF86527080A6ABFC16B69A3DC0DFFB /* Pods */,
 				2BEB3F41F6C5DE23DA68BA0F0B9E1862 /* Products */,
 				E22C6116BFD0F26EBB281B03AB561ADB /* Targets Support Files */,
 			);
@@ -167,6 +161,14 @@
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/BXSlider";
+			sourceTree = "<group>";
+		};
+		81C689C3AFC1C7FF242CFAB8DDD09E4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12DFEEB3509D877B6CE65BCE2EEB0562 /* Reveal.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8669293256E1558CED70E6FADB64CE48 /* Pods-BXSlider_Tests */ = {
@@ -211,6 +213,14 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		C6FF86527080A6ABFC16B69A3DC0DFFB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D70BEE20B57C04A4512260E625802768 /* Reveal-iOS-SDK */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D1C7B75B88B94F553416C6FA5152CC1E /* Pods-BXSlider_Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,9 +242,25 @@
 		D49B636D1C419E5A29C52B61D2479D41 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				2470432B691B95D8F39DAD47DF52D972 /* Classes */,
+				D7E705645F9121F16377AD4DAAB28C91 /* Classes */,
 			);
 			path = Pod;
+			sourceTree = "<group>";
+		};
+		D70BEE20B57C04A4512260E625802768 /* Reveal-iOS-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				81C689C3AFC1C7FF242CFAB8DDD09E4A /* Frameworks */,
+			);
+			path = "Reveal-iOS-SDK";
+			sourceTree = "<group>";
+		};
+		D7E705645F9121F16377AD4DAAB28C91 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DA4E6DA5C6E71C19DA290F634E5C5E36 /* BXSlider.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		E22C6116BFD0F26EBB281B03AB561ADB /* Targets Support Files */ = {
@@ -333,7 +359,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A51527FC228A71FE05836663743D7772 /* Build configuration list for PBXNativeTarget "BXSlider" */;
 			buildPhases = (
-				BFA326FD32AF25642D26079CC15C6A28 /* Sources */,
+				D03BB37EA29DFCDF47001BF214590AD6 /* Sources */,
 				C352E9CFAEC4EE79FD776DD78766A4AE /* Frameworks */,
 				BC2B130C5E3C6FE0466D08985A1E1CF8 /* Resources */,
 				A5DB39C27B118DA94FDDC39CED89FC1D /* Headers */,
@@ -404,12 +430,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BFA326FD32AF25642D26079CC15C6A28 /* Sources */ = {
+		D03BB37EA29DFCDF47001BF214590AD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9AFAA943BAA1A4979597A9EC6108429 /* BXSlider-dummy.m in Sources */,
-				3B0693C8B3978FEF6CF2D36D17366DB8 /* ReplaceMe.swift in Sources */,
+				08193DF4F4346E326F07CBD4EEFDCBAD /* BXSlider-dummy.m in Sources */,
+				9D46611B1216206A0ED426202F3C2906 /* BXSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

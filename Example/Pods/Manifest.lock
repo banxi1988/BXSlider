@@ -1,8 +1,10 @@
 PODS:
   - BXSlider (0.1.0)
+  - Reveal-iOS-SDK (1.6.2)
 
 DEPENDENCIES:
   - BXSlider (from `../`)
+  - Reveal-iOS-SDK
 
 EXTERNAL SOURCES:
   BXSlider:
@@ -10,5 +12,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   BXSlider: 68df072a786d0d3c60ed47430f8dbedca5b0e751
+  Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
 
 COCOAPODS: 0.39.0
