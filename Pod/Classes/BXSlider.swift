@@ -10,6 +10,12 @@ public protocol BXSlide{
     var bx_title:String?{ get }
 }
 
+public extension BXSlide{
+    public var bx_duration:NSTimeInterval{
+        return 3.0
+    }
+}
+
 public class BXSimpleSlide:BXSlide{
     public let image:UIImage?
     public let imageURL:NSURL?
@@ -18,6 +24,7 @@ public class BXSimpleSlide:BXSlide{
     public var bx_image:UIImage?{ return image }
     public var bx_imageURL:NSURL?{ return imageURL  }
     public var bx_title:String?{ return title }
+    public var bx_duration:NSTimeInterval{ return 5.0 }
     
     public  init(image:UIImage,title:String?=nil){
         self.image = image
@@ -31,6 +38,8 @@ public class BXSimpleSlide:BXSlide{
         self.imageURL = imageURL
     }
     
+    
+    
 }
 
 public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
@@ -38,9 +47,10 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
     public let pageControl = UIPageControl()
     public let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: 320, height: 120))
     public var imageScaleMode: UIViewContentMode = .ScaleAspectFill
-    
+    public var autoSlide = true
     public var onTapBXSlideHandler: ( (T) -> Void)?
     public var loadImageBlock:( (URL:NSURL,imageView:UIImageView) -> Void  )?
+    var isFirstStart = true
    
     override init(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 120)) {
         super.init(frame: frame)
@@ -80,7 +90,6 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
     
     public func updateSlides(slides:[T]){
         self.slides = slides
-        
         // configure scroll view
         for subview in scrollView.subviews{
             subview.removeFromSuperview()
@@ -102,12 +111,13 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
             scrollView.addSubview(imageView)
         }
         
+        isFirstStart = true
         bringSubviewToFront(pageControl)
         pageControl.numberOfPages =  slides.count
         pageControl.currentPage = 0
         scrollView.delegate = self
         setNeedsLayout()
-        scheduleTimer()
+        autoTurnPage()
     }
     
     func load(imageURL:NSURL,toImageView imageView:UIImageView){
@@ -155,25 +165,30 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
         onPageChanged()
     }
     
-    public func slideAtCurrentPage() -> T?{
+    public func slideAtCurrentPage() -> T{
         return slides[pageControl.currentPage]
     }
     
-    func onTapSlide(gesture:UITapGestureRecognizer){
-        if let slide = slideAtCurrentPage(){
-            NSLog("\(__FUNCTION__) \(slide.bx_title)")
-            onTapBXSlideHandler?(slide)
-        }
+    public func slideOfPage(page:Int) -> T{
+        return slides[page]
     }
     
-    var autoTurnPageTimer: NSTimer?
-    func scheduleTimer(){
-        autoTurnPageTimer?.invalidate()
-        autoTurnPageTimer =  NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "autoTurnPage", userInfo: nil, repeats: true)
+    func onTapSlide(gesture:UITapGestureRecognizer){
+       let slide = slideAtCurrentPage()
+        NSLog("\(__FUNCTION__) \(slide.bx_title)")
+        onTapBXSlideHandler?(slide)
     }
+    
     
     func autoTurnPage(){
-        let nextPage = (pageControl.currentPage + 1) % slides.count
+        let nextPage = (pageControl.currentPage + (isFirstStart ? 0: 1)) % slides.count
+        isFirstStart = false
+        NSLog("autoTurn to page \(nextPage)")
+        if autoSlide{
+            let nextSlide = slideOfPage(nextPage)
+            let duration = max(1,nextSlide.bx_duration)
+             NSTimer.scheduledTimerWithTimeInterval(duration, target: self, selector: "autoTurnPage", userInfo: nil, repeats: false)
+        }
         let pageWidth = frame.width
         UIView.animateWithDuration(0.25){
             self.scrollView.contentOffset.x = pageWidth * CGFloat(nextPage)
@@ -181,10 +196,4 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
         }
         onPageChanged()
     }
-    
-//    public override func intrinsicContentSize() -> CGSize {
-//        let size = frame.size
-//        NSLog("size \(size)")
-//        return size
-//    }
 }

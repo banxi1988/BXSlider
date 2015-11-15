@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         
         let slides = urls.map{ NSURL(string: $0)}.filter{ $0 != nil }.map{ BXSimpleSlide(imageURL: $0!) }
         let slider = BXSlider<BXSimpleSlide>()
+        slider.autoSlide = true
         self.view.addSubview(slider)
         slider.updateSlides(slides)
         let width = view.frame.width
