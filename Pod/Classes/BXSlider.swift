@@ -14,6 +14,21 @@ public extension BXSlide{
     public var bx_duration:NSTimeInterval{
         return 3.0
     }
+    var bx_image:UIImage?{ return nil }
+    var bx_imageURL:NSURL?{ return nil }
+    var bx_title:String?{ return nil }
+}
+
+extension NSURL:BXSlide{
+  public var bx_imageURL:NSURL?{
+    return self
+  }
+}
+
+extension UIImage:BXSlide{
+  public var bx_image:UIImage?{
+    return self
+  }
 }
 
 public class BXSimpleSlide:BXSlide{
@@ -51,8 +66,12 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
     public var onTapBXSlideHandler: ( (T) -> Void)?
     public var loadImageBlock:( (URL:NSURL,imageView:UIImageView) -> Void  )?
     var isFirstStart = true
-   
-    override init(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 120)) {
+  
+  public convenience init(){
+    self.init(frame: CGRect(x: 0, y: 0, width: 320, height: 120))
+  }
+  
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = frame
         commonInit()
@@ -112,12 +131,18 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
         }
         
         isFirstStart = true
+      if slides.count > 1{
         bringSubviewToFront(pageControl)
         pageControl.numberOfPages =  slides.count
         pageControl.currentPage = 0
         scrollView.delegate = self
-        setNeedsLayout()
         autoTurnPage()
+        pageControl.hidden = false
+      }else{
+        pageControl.hidden = true
+        
+      }
+        setNeedsLayout()
     }
     
     func load(imageURL:NSURL,toImageView imageView:UIImageView){
@@ -183,7 +208,9 @@ public class BXSlider<T:BXSlide>: UIView,UIScrollViewDelegate{
     func autoTurnPage(){
         let nextPage = (pageControl.currentPage + (isFirstStart ? 0: 1)) % slides.count
         isFirstStart = false
+        #if DEBUG
         NSLog("autoTurn to page \(nextPage)")
+        #endif
         if autoSlide{
             let nextSlide = slideOfPage(nextPage)
             let duration = max(1,nextSlide.bx_duration)
