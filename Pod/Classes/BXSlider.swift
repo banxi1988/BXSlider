@@ -178,17 +178,17 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
  
   // UIScrollViewDelegate
   public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-    if debug { NSLog("\(__FUNCTION__)") }
+    if debug { NSLog("\(#function)") }
     removeTimer()
   }
   
   public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-    if debug { NSLog("\(__FUNCTION__)") }
+    if debug { NSLog("\(#function)") }
     // On AutoTurn Page Changed
   }
   
   public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-    if debug { NSLog("\(__FUNCTION__) \(decelerate)") }
+    if debug { NSLog("\(#function) \(decelerate)") }
     addTimerIfNeeded()
     updatePageControl()
   }
