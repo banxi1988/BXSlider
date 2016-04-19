@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BXSlider"
-  s.version          = "1.0.0"
+  s.version          = "1.1.0"
   s.summary          = "BXSlider is a SlideShow and carousel image library"
 
 # This description is used to generate tags and improve search results.
@@ -31,11 +31,7 @@ BXSlider is a SlideShow and carousel image library written in Swift 2.1 and with
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'BXSlider' => ['Pod/Assets/*.png']
-  }
-
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'PinAuto'
 end

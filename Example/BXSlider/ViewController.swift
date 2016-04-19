@@ -22,8 +22,11 @@ class ViewController: UIViewController {
             "http://ww2.sinaimg.cn/large/72973f93gw1ewqbfxchf6j218g0xc4es.jpg",
         ]
         
-        let slides = urls.map{ NSURL(string: $0)}.filter{ $0 != nil }.map{ BXSimpleSlide(imageURL: $0!) }
+        let slides = urls.flatMap{ NSURL(string: $0)}.map{ BXSimpleSlide(imageURL: $0) }
         let slider = BXSlider<BXSimpleSlide>()
+      slider.onTapBXSlideHandler = { slide in
+        NSLog("onTapSlide \(slide.imageURL)")
+      }
         slider.autoSlide = true
         self.view.addSubview(slider)
         slider.updateSlides(slides)
