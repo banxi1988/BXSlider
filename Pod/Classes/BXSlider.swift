@@ -80,6 +80,7 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     scrollView.showsVerticalScrollIndicator = false
     scrollView.bounces = false
     scrollView.bouncesZoom = false
+    scrollView.pagingEnabled = true
     pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
     pageControl.pageIndicatorTintColor = UIColor(white: 0.5, alpha: 0.8)
     pageControl.clipsToBounds = true
@@ -192,25 +193,6 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     addTimerIfNeeded()
     updatePageControl()
   }
-  
-  public func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    let targetOffset = targetContentOffset.memory
-    let offsetX = targetOffset.x
-    let pageWidth = scrollView.bounds.width
-    let page = floor(offsetX / pageWidth)
-    let pageOffsetX = offsetX % pageWidth
-    var adjustedOffsetX:CGFloat
-    if (pageOffsetX / scrollView.bounds.width) > 0.5 {
-      adjustedOffsetX = pageWidth * ( page + CGFloat(1))
-    }else{
-      adjustedOffsetX = pageWidth *  page
-    }
-    if debug { NSLog("Adjusted contentOffset.X from: \(offsetX) to \(adjustedOffsetX)") }
-    
-    targetContentOffset.memory.x = adjustedOffsetX
-    
-  }
-  
   
 }
 
