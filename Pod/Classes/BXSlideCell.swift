@@ -28,6 +28,7 @@ class BXSlideCell : UICollectionViewCell{
   var item:BXSlide?
   func bind<T:BXSlide>(item:T,to slider:BXSlider<T>){
     self.item = item
+    imageView.image = nil // 避免重用时出现老的图片
     //         imageView.kf_setImageWithURL(item._)
     if let image = item.bx_image{
       imageView.image = image

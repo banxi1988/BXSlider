@@ -190,8 +190,12 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
   
   public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     if debug { NSLog("\(#function) \(decelerate)") }
-    addTimerIfNeeded()
-    updatePageControl()
+  }
+  
+  public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    if debug { NSLog("\(#function)") }
+      addTimerIfNeeded()
+      updatePageControl()
   }
   
 }
