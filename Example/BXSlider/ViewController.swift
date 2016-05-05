@@ -27,7 +27,7 @@ class ViewController: UIViewController {
       slider.onTapBXSlideHandler = { slide in
         NSLog("onTapSlide \(slide.imageURL)")
       }
-        slider.autoSlide = true
+        slider.autoSlide = false
         self.view.addSubview(slider)
         slider.updateSlides(slides)
         let width = view.frame.width

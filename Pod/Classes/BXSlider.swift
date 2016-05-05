@@ -5,10 +5,15 @@
 import UIKit
 import PinAuto
 
+#if DEBUG
 private let debug = false
+#else
+private let debug = false
+#endif
 
 public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   public private(set) var slides:[T] = []
+  private var loopSlides: [T] = []
   public let pageControl = UIPageControl()
   private let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
   public var scrollView:UICollectionView{
@@ -24,6 +29,7 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
   
   private let flowlayout = UICollectionViewFlowLayout()
   var isFirstStart = true
+  public var loopEnabled = true
   
   public convenience init(){
     self.init(frame: CGRect(x: 0, y: 0, width: 320, height: 120))
@@ -91,6 +97,10 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     // 需要在 Layout 中确定 itemSize
     let itemSize = bounds.size
     flowlayout.itemSize = itemSize
+    if loopEnabled{
+      let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
+    }
   }
   
   
@@ -102,6 +112,16 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     if !rawSlides.isEmpty{
       self.slides.appendContentsOf(rawSlides)
     }
+    loopSlides.removeAll()
+    loopSlides.appendContentsOf(rawSlides)
+    
+    if let first = rawSlides.first{
+      loopSlides.insert(first, atIndex: 0)
+    }
+    if let last = rawSlides.last{
+      loopSlides.append(last)
+    }
+    
     pageControl.numberOfPages =  rawSlides.count
     pageControl.currentPage = 0
     collectionView.reloadData()
@@ -110,10 +130,23 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
         fireTimerAfterDeplay(first.bx_duration)
       }
     }
+
   }
   
   func updatePageControl(){
-    if let index = currentPageIndexPath{
+    guard  let index = currentPageIndexPath else {
+      return
+    }
+    if debug { NSLog("currentIndexPath: \(index.to_s)") }
+    if loopEnabled{
+      if index.item == 0 {
+        pageControl.currentPage = slides.count - 1
+      }else if index.item == loopSlides.count - 1 {
+        pageControl.currentPage = 0
+      }else{
+        pageControl.currentPage = index.item - 1
+      }
+    }else{
       pageControl.currentPage = index.item
     }
   }
@@ -155,8 +188,16 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     return 1
   }
   
+  private var numberOfItems:Int {
+    if loopEnabled{
+       return loopSlides.count
+    }else{
+      return slides.count
+    }
+  }
+  
   public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return slides.count
+    return numberOfItems
   }
   
   public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -179,34 +220,62 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
  
   // UIScrollViewDelegate
   public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-    if debug { NSLog("\(#function)") }
+//    if debug { NSLog("\(#function)") }
     removeTimer()
   }
-  
-  public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-    if debug { NSLog("\(#function)") }
-    // On AutoTurn Page Changed
-  }
-  
-  public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-    if debug { NSLog("\(#function) \(decelerate)") }
-  }
+
   
   public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
     if debug { NSLog("\(#function)") }
       addTimerIfNeeded()
+    handleSlideToFirstAndLastSlide()
       updatePageControl()
+  }
+  
+  public func scrollViewDidScroll(scrollView: UIScrollView) {
+//    if debug { NSLog("\(#function)") }
+  }
+  
+  func handleSlideToFirstAndLastSlide(){
+    if !loopEnabled{
+      return
+    }
+    guard let currentIndexPath = currentPageIndexPath else{
+      return
+    }
+    if debug { NSLog("[\(self.loopSlides.count)] currentIndexPath: \(currentIndexPath.to_s)") }
+    let index = currentIndexPath.item
+    if index == self.loopSlides.count - 1 {
+      if debug { NSLog("loopToFirst") }
+      let indexPath = NSIndexPath(forItem: 1, inSection: 0)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
+      pageControl.currentPage = 0
+    }else if index == 0{
+      if debug { NSLog("loopToLast") }
+      let indexPath = NSIndexPath(forItem: self.loopSlides.count - 1, inSection: 0)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
+      pageControl.currentPage = pageControl.numberOfPages - 1
+    }
   }
   
 }
 
+extension NSIndexPath{
+  var to_s:String{
+    return "[\(section),\(item)]"
+  }
+}
 
 public let bxSlideCellIdentifier = "slideCell"
 
 extension BXSlider{
   
   public func itemAtIndexPath(indexPath:NSIndexPath) -> T{
-    return slides[indexPath.item]
+    if loopEnabled{
+      return loopSlides[indexPath.item]
+    }else{
+      return slides[indexPath.item]
+    }
   }
   
 }
@@ -221,12 +290,18 @@ extension BXSlider{
 
 extension BXSlider{
   func addTimerIfNeeded(){
+    if !autoSlide{
+      return
+    }
     if let slide = slideAtCurrentPage(){
       addTimer(slide)
     }
   }
   
   func addTimer(nextSlide:T){
+    if !autoSlide{
+      return
+    }
     let duration = max(1,nextSlide.bx_duration)
     fireTimerAfterDeplay(duration)
   }
@@ -242,7 +317,7 @@ extension BXSlider{
   }
   
   func nextCycleIndexPathOf(indexPath:NSIndexPath) -> NSIndexPath{
-    let index = (indexPath.item + 1) % slides.count
+    let index = (indexPath.item + 1) % numberOfItems
     return NSIndexPath(forItem: index, inSection: 0)
   }
   
