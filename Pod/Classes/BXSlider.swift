@@ -97,7 +97,7 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     // 需要在 Layout 中确定 itemSize
     let itemSize = bounds.size
     flowlayout.itemSize = itemSize
-    if loopEnabled{
+    if loopEnabled && !loopSlides.isEmpty {
       let indexPath = NSIndexPath(forRow: 1, inSection: 0)
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
     }
@@ -125,6 +125,10 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     pageControl.numberOfPages =  rawSlides.count
     pageControl.currentPage = 0
     collectionView.reloadData()
+    if loopEnabled{
+      let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+      collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
+    }
     if autoSlide{
       if let first = slides.first{
         fireTimerAfterDeplay(first.bx_duration)
