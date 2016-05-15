@@ -1,5 +1,5 @@
 PODS:
-  - BXSlider (1.1.0):
+  - BXSlider (1.3.1):
     - PinAuto
   - PinAuto (1.6)
   - Reveal-iOS-SDK (1.6.2)
@@ -13,10 +13,10 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BXSlider: 3c24492de0e085f2f56ae47591ec03f4ef42faac
+  BXSlider: 8c3ec82e32dff434860fbc84a369c42c0c43c264
   PinAuto: 3fea106a06036fedf49928e65a1bced151c02f8a
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
 
 PODFILE CHECKSUM: 65014ee3e83a485eb695bed5888c1e6a4d1cb7a3
 
-COCOAPODS: 1.0.0.beta.8
+COCOAPODS: 1.0.0
