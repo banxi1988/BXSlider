@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BXSlider"
-  s.version          = "1.3.2"
+  s.version          = "1.3.3"
   s.summary          = "BXSlider is a SlideShow and carousel image library"
 
 # This description is used to generate tags and improve search results.

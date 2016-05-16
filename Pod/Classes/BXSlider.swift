@@ -125,7 +125,7 @@ public class BXSlider<T:BXSlide>: UIView, UICollectionViewDataSource,UICollectio
     pageControl.numberOfPages =  rawSlides.count
     pageControl.currentPage = 0
     collectionView.reloadData()
-    if loopEnabled{
+    if loopEnabled && !loopSlides.isEmpty{
       let indexPath = NSIndexPath(forRow: 1, inSection: 0)
       collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
     }
